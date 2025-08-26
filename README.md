@@ -1,12 +1,5 @@
-## 👉 Configuration
+## 👉 Queue Priority
 
 ```text
-.env ->
-QUEUE_CONNECTION=database
-```
-
-## 👉 Command
-
-```text
-php artisan queue:work
+php artisan queue:work --queue=high,default
 ```
