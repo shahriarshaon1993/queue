@@ -16,16 +16,19 @@ class UserController extends Controller
 
         foreach ($users as $user) {
             dispatch(new SendingSmsMailJob($user));
-            Log::info("Sending SMS to {$user->email}");
+
+            if ($user->id === 1) {
+                break;
+            }
         }
 
-        return back()->with('message', 'SMS sending initiated.');
+        return back()->with('success', 'SMS sending initiated.');
     }
 
     public function sendOtp(User $user)
     {
         dispatch(new LoginOtpSendingMailJob($user))->onQueue('heigh');
 
-        return back();
+        return back()->with('success', 'OTP sending initiated.');
     }
 }

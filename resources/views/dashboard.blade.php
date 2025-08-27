@@ -8,12 +8,12 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             @if (session('success'))
-                <div class="bg-green-500 text-white font-bold rounded-md px-4 py-2 shadow">
+                <div class="bg-gary-500 text-white font-bold rounded-md px-4 py-2 shadow">
                     {{ session('success') }}
                 </div>
             @endif
 
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-6">
                 <div class="p-6 flex gap-4 text-gray-900">
                     <a href="{{ route('send.sms') }}"
                         class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
