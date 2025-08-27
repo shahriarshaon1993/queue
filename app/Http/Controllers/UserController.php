@@ -16,10 +16,6 @@ class UserController extends Controller
 
         foreach ($users as $user) {
             dispatch(new SendingSmsMailJob($user));
-
-            if ($user->id === 1) {
-                break;
-            }
         }
 
         return back()->with('success', 'SMS sending initiated.');

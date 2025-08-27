@@ -28,12 +28,14 @@ class SendingSmsMailJob implements ShouldQueue
     {
         $isCheck = rand(0, 1);
 
-        if ($isCheck === 0) {
+        if ($isCheck === 0 && $this->attempts() < 3) {
             throw new \Exception('Failed to send SMS');
         }
 
         Mail::to($this->user->email)
             ->send(new SendingSmsMail($this->user));
+
+        echo "{$this->user->email} to Attempts: {$this->attempts()}" . PHP_EOL;
     }
 
     public function failed($exception)
