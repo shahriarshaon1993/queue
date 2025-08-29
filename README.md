@@ -1,27 +1,33 @@
-## 👉 Queue Priority
+## 🔹 Step 1: Node.js install
 
 ```text
-php artisan queue:work --queue=high,default
+npm install -g pm2
 
-php artisan queue:monitor [options] [--] <queues>
-- [options] is queue name
+pm2 -v // for check
+```
 
-php artisan queue:failed
-- Show all failed queue
+## 🔹 Step 2: Laravel worker run (10 parallel)
 
-php artisan queue:retry [id]
-- Pushing failed queue jobs back onto the queue.
+```text
+pm2 start "php artisan queue:work --queue=high,custom,default --sleep=3 --tries=3" --name=laravel-worker -i 10
+```
 
-php artisan queue:retry --queue=custom
+## 🔹 Step 3: Auto-start (macOS reboot)
 
-php artisan queue:work --queue=default,custom --tries=3
-- Processing jobs from the [default,custom] queues
+```text
+pm2 startup
+তুমি চাইছো তোমার Laravel Queue Worker বা যেকোনো প্রক্রিয়া (process) Mac reboot বা shutdown/restart হওয়ার পরও অটোমেটিক আবার চালু হয়ে যাক।
 
-php artisan queue:clear --queue=default
+pm2 save
+তুমি এখন পর্যন্ত যতগুলো process চালিয়েছো (যেমন php artisan queue:work 10 workers ইত্যাদি) এগুলোকে pm2 save করে রাখবে।
+```
 
-php artisan queue:forget [id]
-- Clear id ways failed queue from failed_jobs
+## 🔹 Step 4: PM2 commands (daily use)
 
-php artisan queue:flush
-- Clear all failed queue from failed_jobs
+```text
+pm2 list                    # সব process list করবে
+pm2 restart laravel-worker  # restart
+pm2 stop laravel-worker     # stop
+pm2 delete laravel-worker   # remove
+pm2 logs laravel-worker     # log দেখবে
 ```

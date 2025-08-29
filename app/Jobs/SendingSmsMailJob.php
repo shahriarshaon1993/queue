@@ -35,7 +35,7 @@ class SendingSmsMailJob implements ShouldQueue
         Mail::to($this->user->email)
             ->send(new SendingSmsMail($this->user));
 
-        echo "{$this->user->email} to Attempts: {$this->attempts()}" . PHP_EOL;
+        echo "{$this->user->id}: {$this->user->email} to Attempts: {$this->attempts()}" . PHP_EOL;
     }
 
     public function failed($exception)
