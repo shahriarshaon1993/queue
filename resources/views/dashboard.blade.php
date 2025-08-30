@@ -36,6 +36,15 @@
                     </a>
                 </div>
             </div>
+
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-6">
+                <div class="p-6 flex gap-4 text-gray-900">
+                    <a href="{{ route('upload.video') }}"
+                        class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                        {{ __('Upload Video') }}
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </x-app-layout>

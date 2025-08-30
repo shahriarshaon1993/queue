@@ -4,6 +4,7 @@ use App\Http\Controllers\DatabaseBackupController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,6 +28,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('calculate-marks', [ResultController::class, 'calculateMarks'])
         ->name('calculate.marks');
+
+    Route::get('/upload/video', [VideoController::class, 'upload'])
+        ->name('upload.video');
 });
 
 require __DIR__ . '/auth.php';
