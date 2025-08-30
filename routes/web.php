@@ -31,6 +31,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/upload/video', [VideoController::class, 'upload'])
         ->name('upload.video');
+
+    Route::get('observe-batch/{id}', [VideoController::class, 'observeBatch'])
+        ->name('observe.batch');
 });
 
 require __DIR__ . '/auth.php';

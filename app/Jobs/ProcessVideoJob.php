@@ -24,13 +24,7 @@ class ProcessVideoJob implements ShouldQueue
     {
         echo "Processing video...\n";
 
-        $isCheck = rand(0, 1);
-
-        if ($isCheck === 0) {
-            throw new \Exception('Failed to process video');
-        }
-
-        sleep(2);
+        sleep(5);
 
         echo "Video processed successfully.\n";
     }

@@ -2,12 +2,13 @@
 
 namespace App\Jobs;
 
+use Illuminate\Bus\Batchable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 
 class UploadVideoJob implements ShouldQueue
 {
-    use Queueable;
+    use Queueable, Batchable;
 
     /**
      * Create a new job instance.
@@ -24,7 +25,7 @@ class UploadVideoJob implements ShouldQueue
     {
         echo "Uploading video...\n";
 
-        sleep(2);
+        sleep(5);
 
         echo "Video uploaded successfully.\n";
     }

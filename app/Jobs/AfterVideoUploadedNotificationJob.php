@@ -24,7 +24,7 @@ class AfterVideoUploadedNotificationJob implements ShouldQueue
     {
         echo "Sending notification after video upload...\n";
 
-        sleep(2);
+        sleep(5);
 
         echo "Notification sent successfully.\n";
     }

@@ -17,19 +17,22 @@ class VideoController extends Controller
     {
         dispatch(new TakeDatabaseBackupJob());
 
-        Bus::chain([
+        $batch = Bus::batch([
             new UploadVideoJob(),
-            new ProcessVideoJob(),
-            new AfterVideoUploadedNotificationJob(),
-        ])
-            ->onQueue('video')
-            ->catch(function (Exception $e) {
-                echo "Video processing failed: " . $e->getMessage() . "\n";
-            })
-            ->dispatch();
+            new UploadVideoJob(),
+            new UploadVideoJob(),
+            new UploadVideoJob(),
+        ])->dispatch();
 
-        echo "Uploading...\n";
+        echo "Uploading video to batch ID: " . $batch->id . "\n";
 
         dispatch(new CalculateMarkForSingleClassJob(1));
+    }
+
+    public function observeBatch($id)
+    {
+        $batch = Bus::findBatch($id);
+
+        dd($batch);
     }
 }
