@@ -23,17 +23,13 @@ class SendNotificationJob implements ShouldQueue
      */
     public function handle(): void
     {
-        echo "{$this->userId}: Notification sent.\n";
-
         sleep(1);
 
         Log::info("{$this->userId}: Notification sent to user: [name]");
-
-        echo "{$this->userId}: Job completed.\n";
     }
 
     public function middleware()
     {
-        return [new \App\Jobs\Middleware\CheckUserActive];
+        return [new \App\Jobs\Middleware\RateLimitNotifications()];
     }
 }
