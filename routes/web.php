@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\DatabaseBackupController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ResultController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +21,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/send-sms', [UserController::class, 'sendSms'])->name('send.sms');
     Route::get('/send-otp/{user}', [UserController::class, 'sendOtp'])->name('send.otp');
+
+    Route::get('database-backup', [DatabaseBackupController::class, 'create'])
+        ->name('database.backup');
+
+    Route::get('calculate-marks', [ResultController::class, 'calculateMarks'])
+        ->name('calculate.marks');
 });
 
 require __DIR__ . '/auth.php';

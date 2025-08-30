@@ -24,6 +24,16 @@
                         class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                         {{ __('Send OTP') }}
                     </a>
+
+                    <a href="{{ route('database.backup') }}"
+                        class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                        {{ __('Backup') }}
+                    </a>
+
+                    <a href="{{ route('calculate.marks') }}"
+                        class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                        {{ __('Calculate Marks') }}
+                    </a>
                 </div>
             </div>
         </div>

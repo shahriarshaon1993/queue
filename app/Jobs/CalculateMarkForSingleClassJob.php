@@ -2,10 +2,11 @@
 
 namespace App\Jobs;
 
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 
-class CalculateMarkForSingleClassJob implements ShouldQueue
+class CalculateMarkForSingleClassJob implements ShouldQueue, ShouldBeUnique
 {
     use Queueable;
 
@@ -27,5 +28,10 @@ class CalculateMarkForSingleClassJob implements ShouldQueue
         sleep(2);
 
         echo "Completed calculating marks for class ID: {$this->classId}\n";
+    }
+
+    public function uniqueId(): int
+    {
+        return $this->classId;
     }
 }
