@@ -15,6 +15,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('generate-invoice', function () {
+        \App\Jobs\GenerateInvoiceJob::dispatch(1);
+
+
+        return back()->with('success', 'Invoice generation job dispatched!');
+    })->name('generate.invoice');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
