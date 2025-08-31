@@ -17,9 +17,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('send-notification', function () {
-        for ($i = 1; $i <= 10; $i++) {
-            dispatch(new \App\Jobs\SendNotificationJob(1));
-        }
+        dispatch(new \App\Jobs\SendNotificationJob(1));
+        dispatch(new \App\Jobs\SendNotificationJob(1));
+        dispatch(new \App\Jobs\SendNotificationJob(1));
 
         return back()->with('success', 'Notification job dispatched!');
     })->name('send.notification');

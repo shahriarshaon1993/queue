@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Queue\Middleware\WithoutOverlapping;
 use Illuminate\Support\Facades\Log;
 
 class SendNotificationJob implements ShouldQueue
@@ -23,13 +24,18 @@ class SendNotificationJob implements ShouldQueue
      */
     public function handle(): void
     {
-        sleep(1);
-
         Log::info("{$this->userId}: Notification sent to user: [name]");
+
+        sleep(seconds: 15);
+
+        Log::info("{$this->userId}: Notification process completed.");
     }
 
-    public function middleware()
+    public function middleware(): array
     {
-        return [new \App\Jobs\Middleware\RateLimitNotifications()];
+        return [
+            // There will be no overlap for the same user.
+            (new WithoutOverlapping($this->userId))->expireAfter(120)
+        ];
     }
 }
